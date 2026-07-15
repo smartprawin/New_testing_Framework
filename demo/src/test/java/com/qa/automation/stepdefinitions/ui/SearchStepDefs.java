@@ -21,9 +21,10 @@ public class SearchStepDefs extends BaseStepDefinition {
 
     private SearchPage searchPage;
 
-    // Build the page object after the base class captured the page (order 2).
+    // Build the page object after capturing the page Hooks prepared (order 2).
     @Before(order = 3)
     public void initPage() {
+        capturePage();                 // from BaseStepDefinition
         searchPage = new SearchPage(page);
     }
 

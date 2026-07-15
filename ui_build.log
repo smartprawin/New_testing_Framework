@@ -1,0 +1,70 @@
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by org.fusesource.jansi.internal.JansiLoader in an unnamed module (file:/C:/Users/JARVIS/AppData/Local/Temp/opencode/maven/apache-maven-3.9.9/lib/jansi-2.4.1.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by com.google.common.util.concurrent.AbstractFuture$UnsafeAtomicHelper (file:/C:/Users/JARVIS/AppData/Local/Temp/opencode/maven/apache-maven-3.9.9/lib/guava-33.2.1-jre.jar)
+WARNING: Please consider reporting this to the maintainers of class com.google.common.util.concurrent.AbstractFuture$UnsafeAtomicHelper
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+WARNING: Final field _cipher in class org.sonatype.plexus.components.sec.dispatcher.DefaultSecDispatcher has been mutated reflectively by class org.eclipse.sisu.bean.BeanPropertyField in unnamed module @1d548a08 (file:/C:/Users/JARVIS/AppData/Local/Temp/opencode/maven/apache-maven-3.9.9/lib/org.eclipse.sisu.inject-0.9.0.M3.jar)
+WARNING: Use --enable-final-field-mutation=ALL-UNNAMED to avoid a warning
+WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] automation-framework                                               [pom]
+[INFO] demo                                                               [jar]
+[INFO] 
+[INFO] --------------------< com.qa:automation-framework >---------------------
+[INFO] Building automation-framework 1.0.0                                [1/2]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ automation-framework ---
+[INFO] Deleting F:\Data Engineering\New_testing_Framework\target
+[INFO] 
+[INFO] ----------------------------< com.qa:demo >-----------------------------
+[INFO] Building demo 1.0-SNAPSHOT                                         [2/2]
+[INFO]   from demo\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ demo ---
+[INFO] Deleting F:\Data Engineering\New_testing_Framework\demo\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ demo ---
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ demo ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 1 source file with javac [debug release 17] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ demo ---
+[INFO] Copying 4 resources from src\test\resources to target\test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ demo ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 12 source files with javac [debug release 17] to target\test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ demo ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- exec:3.5.0:java (run-cucumber) @ demo ---
+
+@ui
+Scenario: Successful login with valid credentials                        # classpath:features/ui/login.feature:12
+  ✔ Given I navigate to the login page                                   # com.qa.automation.stepdefinitions.ui.LoginStepDefs.iNavigateToTheLoginPage()
+  ✔ When I enter username "tomsmith" and password "SuperSecretPassword!" # com.qa.automation.stepdefinitions.ui.LoginStepDefs.iEnterUsernameAndPassword(java.lang.String,java.lang.String)
+  ✔ And I click the login button                                         # com.qa.automation.stepdefinitions.ui.LoginStepDefs.iClickTheLoginButton()
+  ✔ Then I should be redirected to the dashboard                         # com.qa.automation.stepdefinitions.ui.LoginStepDefs.iShouldBeRedirectedToTheDashboard()
+
+@ui
+Scenario: Search for a topic                            # classpath:features/ui/search.feature:10
+  ✔ Given I am on the Wikipedia home page               # com.qa.automation.stepdefinitions.ui.SearchStepDefs.iAmOnTheWikipediaHomePage()
+  ✔ When I search for "Playwright"                      # com.qa.automation.stepdefinitions.ui.SearchStepDefs.iSearchFor(java.lang.String)
+  ✔ Then the search results should mention "Playwright" # com.qa.automation.stepdefinitions.ui.SearchStepDefs.theSearchResultsShouldMention(java.lang.String)
+
+2 scenarios (2 passed)
+19 steps (19 passed)
+0m 9.522s

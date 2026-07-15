@@ -3,10 +3,11 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
-          <groupId>com.qa</groupId>
-          <artifactId>automation-framework</artifactId>
-          <version>1.0.0</version>
+        <groupId>com.qa</groupId>
+        <artifactId>automation-framework</artifactId>
+        <version>1.0.0</version>
     </parent>
 
     <groupId>com.qa</groupId>
@@ -18,4 +19,66 @@
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
 
+    <build>
+        <plugins>
+            <!-- We run Cucumber directly with its own CLI (io.cucumber.core.cli.Main)
+                 instead of Maven Surefire + the JUnit Platform, to avoid a version
+                 conflict that crashes the test JVM. The @Suite TestRunner class is
+                 still used when you run tests from your IDE. -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.5.0</version>
+                <executions>
+                    <!-- 1) Download the browser binaries once, before tests.
+                         (Commented out here during sandbox verification because the
+                          browsers are already installed; re-enable on a clean machine.) -->
+                    <!--
+                    <execution>
+                        <id>install-playwright-browsers</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <classpathScope>test</classpathScope>
+                            <mainClass>com.microsoft.playwright.CLI</mainClass>
+                            <arguments>
+                                <argument>install</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                    -->
+
+                    <!-- 2) Run the Cucumber features. -->
+                    <execution>
+                        <id>run-cucumber</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <classpathScope>test</classpathScope>
+                            <mainClass>io.cucumber.core.cli.Main</mainClass>
+                            <arguments>
+                                <argument>--glue</argument>
+                                <argument>com.qa.automation</argument>
+                                <argument>--plugin</argument>
+                                <argument>pretty</argument>
+                                <argument>--plugin</argument>
+                                <argument>html:${project.build.directory}/cucumber-report.html</argument>
+                                <argument>--plugin</argument>
+                                <argument>json:${project.build.directory}/cucumber.json</argument>
+                                <!-- Filter by tag. Default runs everything; override with
+                                     -Dcucumber.tags="@api" or -Dcucumber.tags="@ui" -->
+                                <argument>--tags</argument>
+                                <argument>${cucumber.tags}</argument>
+                                <argument>classpath:features</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

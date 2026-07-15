@@ -46,9 +46,13 @@ public class Hooks {
             // 2. Read settings from config.properties.
             boolean headless = Boolean.parseBoolean(ConfigReader.get("headless", "true"));
             String name = ConfigReader.get("browser", "chromium").toLowerCase();
+            // slowMo adds a pause (ms) before every action so you can follow along.
+            double slowMo = Double.parseDouble(ConfigReader.get("slowMo", "0"));
 
             // 3. Launch the chosen browser (headless = no visible window).
-            BrowserType.LaunchOptions options = new BrowserType.LaunchOptions().setHeadless(headless);
+            BrowserType.LaunchOptions options = new BrowserType.LaunchOptions()
+                    .setHeadless(headless)
+                    .setSlowMo(slowMo);
             browser = switch (name) {
                 case "firefox" -> playwright.firefox().launch(options);
                 case "webkit"   -> playwright.webkit().launch(options);

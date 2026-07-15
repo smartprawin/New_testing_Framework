@@ -1,0 +1,100 @@
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by org.fusesource.jansi.internal.JansiLoader in an unnamed module (file:/C:/Users/JARVIS/AppData/Local/Temp/opencode/maven/apache-maven-3.9.9/lib/jansi-2.4.1.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by com.google.common.util.concurrent.AbstractFuture$UnsafeAtomicHelper (file:/C:/Users/JARVIS/AppData/Local/Temp/opencode/maven/apache-maven-3.9.9/lib/guava-33.2.1-jre.jar)
+WARNING: Please consider reporting this to the maintainers of class com.google.common.util.concurrent.AbstractFuture$UnsafeAtomicHelper
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+WARNING: Final field _cipher in class org.sonatype.plexus.components.sec.dispatcher.DefaultSecDispatcher has been mutated reflectively by class org.eclipse.sisu.bean.BeanPropertyField in unnamed module @1d548a08 (file:/C:/Users/JARVIS/AppData/Local/Temp/opencode/maven/apache-maven-3.9.9/lib/org.eclipse.sisu.inject-0.9.0.M3.jar)
+WARNING: Use --enable-final-field-mutation=ALL-UNNAMED to avoid a warning
+WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] automation-framework                                               [pom]
+[INFO] demo                                                               [jar]
+[INFO] 
+[INFO] --------------------< com.qa:automation-framework >---------------------
+[INFO] Building automation-framework 1.0.0                                [1/2]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] ----------------------------< com.qa:demo >-----------------------------
+[INFO] Building demo 1.0-SNAPSHOT                                         [2/2]
+[INFO]   from demo\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ demo ---
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ demo ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ demo ---
+[INFO] Copying 4 resources from src\test\resources to target\test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ demo ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ demo ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- exec:3.5.0:java (run-cucumber) @ demo ---
+
+@api
+Scenario: Get a post                                    # classpath:features/api/users.feature:9
+  ✔ Given I set the API base URI                        # com.qa.automation.stepdefinitions.api.ApiStepDefs.iSetTheApiBaseUri()
+Request method:	GET
+Request URI:	https://jsonplaceholder.typicode.com/posts/1
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 OK
+Date: Wed, 15 Jul 2026 20:36:10 GMT
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Access-Control-Allow-Credentials: true
+Cache-Control: max-age=43200
+Etag: W/"124-yiKdLzqO5gfBrJFrcdJ8Yq0LGnU"
+Expires: -1
+Nel: {"report_to":"heroku-nel","response_headers":["Via"],"max_age":3600,"success_fraction":0.01,"failure_fraction":0.1}
+Pragma: no-cache
+Report-To: {"group":"heroku-nel","endpoints":[{"url":"https://nel.heroku.com/reports?s=QglcSgAbDGSgTVeC%2FTtt2BgLQcIUu2Sziv5yPbSe4iM%3D\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\u0026ts=1772037115"}],"max_age":3600}
+Reporting-Endpoints: heroku-nel="https://nel.heroku.com/reports?s=QglcSgAbDGSgTVeC%2FTtt2BgLQcIUu2Sziv5yPbSe4iM%3D&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&ts=1772037115"
+Server: cloudflare
+Vary: Origin, Accept-Encoding
+Via: 2.0 heroku-router
+X-Content-Type-Options: nosniff
+X-Powered-By: Express
+X-Ratelimit-Limit: 1000
+X-Ratelimit-Remaining: 999
+X-Ratelimit-Reset: 1772037160
+Age: 11319
+Cf-Cache-Status: HIT
+Content-Encoding: gzip
+CF-RAY: a1bb8eceffadff6e-BOM
+alt-svc: h3=":443"; ma=86400
+
+{
+    "userId": 1,
+    "id": 1,
+    "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+    "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+}
+  ✔ When I send a GET request to "/posts/1"             # com.qa.automation.stepdefinitions.api.ApiStepDefs.iSendAGetRequestTo(java.lang.String)
+  ✔ Then the response status code should be 200         # com.qa.automation.stepdefinitions.api.ApiStepDefs.theResponseStatusCodeShouldBe(int)
+  ✔ And the response should contain "id" with value "1" # com.qa.automation.stepdefinitions.api.ApiStepDefs.theResponseShouldContainWithValue(java.lang.String,java.lang.String)
+
+1 scenarios (1 passed)
+10 steps (10 passed)
+0m 4.199s

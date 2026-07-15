@@ -24,8 +24,9 @@ public class LoginPage extends BasePage {
         super(page);
         // page.locator(selector) is the Playwright version of
         // driver.findElement(By.cssSelector("...")) in Selenium.
-        this.usernameInput = page.locator("input[name='username']");
-        this.passwordInput = page.locator("input[name='password']");
+        // The-internet demo login form field ids:
+        this.usernameInput = page.locator("#username");
+        this.passwordInput = page.locator("#password");
         this.loginButton = page.locator("button[type='submit']");
     }
 

@@ -23,7 +23,9 @@ public class SearchPage extends BasePage {
 
     public SearchPage(Page page) {
         super(page);
-        this.searchInput = page.locator("input[name='search']");
+        // Wikipedia has two search boxes (header + sticky). Use the one with id
+        // "searchInput" so Playwright's strict mode doesn't find 2 matches.
+        this.searchInput = page.locator("#searchInput");
         this.firstHeading = page.locator("#firstHeading");
     }
 

@@ -21,9 +21,10 @@ public class LoginStepDefs extends BaseStepDefinition {
 
     private LoginPage loginPage;
 
-    // Build the page object AFTER the base class captured the page (order 2).
+    // Build the page object AFTER capturing the page Hooks prepared (order 2).
     @Before(order = 3)
     public void initPage() {
+        capturePage();                 // from BaseStepDefinition
         loginPage = new LoginPage(page);
     }
 
@@ -44,8 +45,8 @@ public class LoginStepDefs extends BaseStepDefinition {
 
     @Then("I should be redirected to the dashboard")
     public void iShouldBeRedirectedToTheDashboard() {
-        // Simple assertion: after login we expect the URL to contain "dashboard".
-        Assertions.assertTrue(loginPage.getCurrentUrl().contains("dashboard"),
-                "Expected to land on the dashboard but was: " + loginPage.getCurrentUrl());
+        // Simple assertion: after a successful login we land on the /secure page.
+        Assertions.assertTrue(loginPage.getCurrentUrl().contains("/secure"),
+                "Expected to land on the secure area but was: " + loginPage.getCurrentUrl());
     }
 }

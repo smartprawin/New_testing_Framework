@@ -2,7 +2,6 @@ package com.qa.automation.pages;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
-
 /**
  * BASE PAGE CLASS  (the Playwright equivalent of your old Selenium base page).
  *
@@ -38,15 +37,16 @@ public abstract class BasePage {
     }
 
     /** Open a URL. (Selenium: driver.get(url)) */
-    protected void openUrl(String url) {
+    public void openUrl(String url) {
         page.navigate(url);
     }
 
     /**
      * Type text into a field. (Selenium: element.sendKeys(text))
-     * Playwright waits for the field to be editable before typing.
+     * Playwright auto-waits for the field to be ready before filling, so no
+     * extra wait is needed (and adding one can fight with slowMo).
      */
-    protected void type(Locator locator, String text) {
+    public void type(Locator locator, String text) {
         locator.fill(text);
     }
 
@@ -54,27 +54,27 @@ public abstract class BasePage {
      * Click an element. (Selenium: element.click())
      * Playwright waits for the element to be visible, stable and enabled first.
      */
-    protected void click(Locator locator) {
+    public void click(Locator locator) {
         locator.click();
     }
 
     /** Read the visible text of an element. (Selenium: element.getText()) */
-    protected String getText(Locator locator) {
-        return locator.textContent();
+    public String getText(Locator locator) {
+        return locator.textContent().trim();
     }
 
     /** Is the element visible? (Selenium: element.isDisplayed()) */
-    protected boolean isVisible(Locator locator) {
+    public boolean isVisible(Locator locator) {
         return locator.isVisible();
     }
 
     /** Current page URL. (Selenium: driver.getCurrentUrl()) */
-    protected String getCurrentUrl() {
+    public String getCurrentUrl() {
         return page.url();
     }
 
     /** Take a screenshot and return the image bytes. */
-    protected byte[] takeScreenshot() {
+    public byte[] takeScreenshot() {
         return page.screenshot();
     }
 }
