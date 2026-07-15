@@ -1,0 +1,18 @@
+# Build output
+target/
+**/target/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Cucumber / Playwright local reports (keep the html in repo if you prefer)
+cucumber-report.html

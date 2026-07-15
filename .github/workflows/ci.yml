@@ -1,0 +1,45 @@
+name: Test Automation
+
+# Runs on every push/PR and can also be triggered manually.
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Use Temurin JDK 17 (matches the framework's target version).
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven   # speeds up builds by caching Maven dependencies
+
+      # Playwright needs a few Linux system libraries to run headless browsers.
+      - name: Install Playwright OS dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libnss3 libnssutil3 libatk1.0-0 libatk-bridge2.0-0 \
+            libcups2 libdrm2 libdbus-1-3 libxkbcommon0 libxcomposite1 libxdamage1 \
+            libxfixes3 libxrandr2 libgbm1 libpango-1.0-0 libcairo2 libasound2 \
+            libatspi2.0-0 libxshmfence1
+
+      # This also downloads the Playwright browsers via the Maven plugin.
+      - name: Run tests
+        run: mvn -B clean test
+
+      # Always publish the HTML report, even if tests failed.
+      - name: Upload Cucumber report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cucumber-report
+          path: target/cucumber-report.html
